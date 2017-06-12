@@ -1,9 +1,8 @@
 <?php
-$username = $_COOKIE["filo-login"];
+$username = $_COOKIE["username"];
 //redirects to login page if user is not logged in
-if(empty($username)){
-  header('Location: ../html/login.html');
-}
+require 'validateUser.php';
+
 $item_name = $_POST["item-name"];
 $description = $_POST["description"];
 $date_found = $_POST["date-found"];
@@ -11,9 +10,9 @@ $category = $_POST["category"];
 $place_found = $_POST["place-found"];
 $colour = $_POST["colour"];
 
-$target_dir = "../images/";
+$target_dir = "../images/" . $username . "/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$file_name = $_FILES["fileToUpload"]["name"];
+$file_name = $username . "/" . $_FILES["fileToUpload"]["name"];
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -30,8 +29,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
     }
 }
 
-$conn = new PDO("mysql:host=localhost;dbname=wilkhuh_db", "wilkhuh","rent59deny");
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require 'databaseConnection.php';
 $stmt = "INSERT INTO lost_items(item_name, description, date_found, category, user, place_found, colour, image_path) VALUES ('$item_name','$description','$date_found','$category','$username','$place_found','$colour','$file_name '";
 $conn->exec($stmt);
 

@@ -46,14 +46,12 @@
 <body>
 
   <?php
-  $username = $_COOKIE["filo-login"];
   //redirects to login page if user is not logged in
-  if(empty($username)){
-    header('Location: ../html/login.html');
-  }
+  require 'validateUser.php';
+  $username = $_COOKIE["username"];
+  
+  require 'databaseConnection.php';
 
-  $conn = new PDO("mysql:host=localhost;dbname=wilkhuh_db", "wilkhuh","rent59deny");
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT is_admin FROM users WHERE username = '$username'");
   $stmt->execute();
   $stmt->setFetchMode(PDO::FETCH_ASSOC);

@@ -15,11 +15,17 @@ function getCookie(name) {
   return unescape(cookie.substring(begin + prefix.length, end));
 }
 
-var myCookie = getCookie("filo-login");
+function clearCookies() {
+  document.cookie = "username=; expires=Thu, 01 Jan 2000 00:00:00 GMT";
+  document.cookie = "password=; expires=Thu, 01 Jan 2000 00:00:00 GMT";
+  location.reload(true);
+}
+
+var myCookie = getCookie("username");
 
 if (myCookie == null) {
-    document.getElementById("login").innerHTML = '<a href="html/login.html">Login</a>'
+    document.getElementById("login").innerHTML = '<a href="php/login-page.php">Login</a>'
 }
 else {
-    document.getElementById("login").innerHTML = myCookie + ' <input type="button" value ="logout" onclick= \'document.cookie = "filo-login=; expires=Thu, 01 Jan 2000 00:00:00 GMT"; location.reload(true);\'/>';
+    document.getElementById("login").innerHTML = myCookie + ' <input type="button" value ="logout" onclick= \'clearCookies();\'/>';
 }

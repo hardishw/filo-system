@@ -7,6 +7,12 @@
 </head>
 
 <body>
+  <?php
+    $error = $_GET["error"];
+    if($error){
+      echo "<p style'color:red;'>Incorrect Login Details</p>";
+    }
+  ?>
   <form action="../php/login.php" method="post">
 
     <p>

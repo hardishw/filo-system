@@ -6,13 +6,20 @@
   <h2>FiLo System</h2>
   <table>
     <tr>
-      <td><div id="login"></div></td>
+      <td>
+        <div id="login"></div>
+      </td>
       <td><a href="html/register.html">Register</a></td>
       <td><a href="php/requests.php">Requests</a></td>
-      <td><a href="html/report-lost.html">Report Lost Item</a></td>
+      <td><a href="php/report-lost.php">Report Lost Item</a></td>
     </tr>
   </table>
   <script type="text/javascript" src="index.js"></script>
+  <style type="text/css">
+    fieldset {
+      display: inline-block;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,33 +28,36 @@
 
   <form action="php/search.php" method="post">
 
-    <fieldset>
-      <legend>Search *:</legend>
-      <p>
-        Search:
-        <input type="text" name="search" size="15" maxlength="50">
-      </p>
-    </fieldset>
-
-    <fieldset>
-      <legend>Time Frame Lost *:</legend>
-      <p>
-        Date min:
-        <input type="date" name="date_min">
-      </p>
-      <p>
-        Date max:
-        <input type="date" name="date_max">
-      </p>
-    </fieldset>
-
-    <fieldset>
-      <legend>Category *:</legend>
-      <input type="radio" name="category" value="Pets"> Pets
-      <input type="radio" name="category" value="Electronics"> Electronics
-      <input type="radio" name="category" value="Jewellery"> Jewellery
-    </fieldset>
-
+    <div>
+      <fieldset>
+        <legend>Search *:</legend>
+        <p>
+          Search:
+          <input type="text" name="search" size="15" maxlength="50">
+        </p>
+      </fieldset>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Time Frame Lost *:</legend>
+        <p>
+          Date min:
+          <input type="date" name="date_min">
+        </p>
+        <p>
+          Date max:
+          <input type="date" name="date_max">
+        </p>
+      </fieldset>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Category *:</legend>
+        <input type="radio" name="category" value="Pets"> Pets
+        <input type="radio" name="category" value="Electronics"> Electronics
+        <input type="radio" name="category" value="Jewellery"> Jewellery
+      </fieldset>
+    </div>
     <p>
       <input type="submit" name="submit" value="Search">
     </p>

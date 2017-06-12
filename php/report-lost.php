@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  <?php require 'validateUser.php'; ?>
   <form action="../php/addLostItem.php" method="post" enctype="multipart/form-data">
     <p style="color:red;">* required </p>
     <p>
