@@ -12,12 +12,12 @@
 <body>
 
     <?php
-    $search = $_POST["search"];
+    $search = strtolower($_POST["search"]);
     $date_min = $_POST["date_min"];
     $date_max = $_POST["date_max"];
     $category = $_POST["category"];
 
-    $query = "SELECT id,item_name,category,place_found,date_found FROM lost_items WHERE item_name LIKE '%$search%'";
+    $query = "SELECT id,item_name,category,place_found,date_found FROM lost_items WHERE lower(item_name) LIKE '%$search%'";
 
     if(!empty($date_min)){
       $query = $query . " AND date_found >= '$date_min'";
