@@ -125,7 +125,7 @@
 
       </form>';
     }else {
-      require 'databaseConnection.php';
+      require 'modules/databaseConnection.php';
       $stmt = "INSERT INTO users (username, firstname, secondname, password, email) VALUES ('$username','$firstname','$secondname','$password','$email')";
       $conn->exec($stmt);
 

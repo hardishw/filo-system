@@ -2,12 +2,12 @@
 <html>
 
 <head>
-  <title>FiLo System - Repoert Lost Item</title>
+  <title>FiLo System - Report Lost Item</title>
   <a href="../index.html">Home</a>
 </head>
 
 <body>
-  <?php require 'validateUser.php'; ?>
+  <?php require 'modules/validateUser.php'; ?>
   <form action="../php/addLostItem.php" method="post" enctype="multipart/form-data">
     <p style="color:red;">* required </p>
     <p>

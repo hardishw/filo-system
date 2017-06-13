@@ -1,7 +1,8 @@
 <?php
-$username = $_COOKIE["username"];
 //redirects to login page if user is not logged in
-require 'validateUser.php';
+require 'modules/validateUser.php';
+
+$username = $_COOKIE["username"];
 
 $item_name = $_POST["item-name"];
 $description = $_POST["description"];
@@ -11,8 +12,10 @@ $place_found = $_POST["place-found"];
 $colour = $_POST["colour"];
 
 $target_dir = "../images/" . $username . "/";
+if (!file_exists($target_dir)) {
+    mkdir($target_dir, 0777, true);
+}
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$file_name = $username . "/" . $_FILES["fileToUpload"]["name"];
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -29,8 +32,8 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
     }
 }
 
-require 'databaseConnection.php';
-$stmt = "INSERT INTO lost_items(item_name, description, date_found, category, user, place_found, colour, image_path) VALUES ('$item_name','$description','$date_found','$category','$username','$place_found','$colour','$file_name '";
+require 'modules/databaseConnection.php';
+$stmt = "INSERT INTO lost_items(item_name, description, date_found, category, user, place_found, colour, image_path) VALUES ('$item_name','$description','$date_found','$category','$username','$place_found','$colour','$target_file')";
 $conn->exec($stmt);
 
 ?>

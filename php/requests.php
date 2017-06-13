@@ -8,14 +8,23 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#approve-btn').prop('disabled', true);
-      $('#reject-btn').prop('disabled', true);
-      if ($('#approve-btn').parent().data('status') === 'PENDING') {
-        $('#approve-btn').prop('disabled', false);
-        $('#reject-btn').prop('disabled', false);
-      }
+      $('.approve-btn').prop('disabled', true);
+      $('.reject-btn').prop('disabled', true);
 
-      $('#approve-btn').click(function() {
+      $( ".approve-btn" ).each(function() {
+        if ($(this).parent().data('status') === 'PENDING') {
+          $(this).prop('disabled', false);
+        }
+      });
+
+      $( ".reject-btn" ).each(function() {
+        if ($(this).parent().data('status') === 'PENDING') {
+          $(this).prop('disabled', false);
+        }
+      });
+
+
+      $('.approve-btn').click(function() {
         var item = $(this).parent().data('item-name');
         var user = $(this).parent().data('username');
 
@@ -27,7 +36,7 @@
           function() {location.reload(true);});
       });
 
-      $('#reject-btn').click(function() {
+      $('.reject-btn').click(function() {
         var item = $(this).parent().data('item-name');
         var user = $(this).parent().data('username');
 
@@ -47,10 +56,10 @@
 
   <?php
   //redirects to login page if user is not logged in
-  require 'validateUser.php';
+  require 'modules/validateUser.php';
   $username = $_COOKIE["username"];
-  
-  require 'databaseConnection.php';
+
+  require 'modules/databaseConnection.php';
 
   $stmt = $conn->prepare("SELECT is_admin FROM users WHERE username = '$username'");
   $stmt->execute();
@@ -58,44 +67,42 @@
 
   $result = $stmt->fetchAll()[0]["is_admin"];
 
+  $request_query = "SELECT item_name,username,status,date_resolved,date_submitted,reason FROM requests";
+
+  echo "<table>";
+  echo "<tr>";
+  echo "<th>item_name</th>";
+  echo "<th>username</th>";
+  echo "<th>status</th>";
+  echo "<th>Date Submitted</th>";
+  echo "<th>Date Resolved</th>";
+  echo "<th>Reason</th>";
+
   if ($result == 1) {
-    $stmt = $conn->prepare("SELECT item_name,username,status,date_resolved FROM requests");
+    $stmt = $conn->prepare($request_query);
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
-    echo "<table>";
-    echo "<tr>";
-    echo "<th>item_name</th>";
-    echo "<th>username</th>";
-    echo "<th>status</th>";
-    echo "<th>Date Submitted</th>";
-    echo "<th>Date Resolved</th>";
     echo "<th>approve/reject</th>";
     echo "</tr>";
 	  foreach(new RecursiveArrayIterator($stmt->fetchAll()) as $k=>$v) {
         echo "<tr>";
         echo "<td>" . $v["item_name"] . "</td><td>" . $v["username"] . "</td><td>" . $v["status"] . "</td><td>" . $v["date_submitted"] . "</td><td>" . $v["date_resolved"] . "</td><td>"
-        . '<div data-status="'.  $v["status"] . '" data-item-name="' . $v["item_name"] . '" data-username="' .  $v["username"] . '"><input id="approve-btn" type="button" value ="approve")/> <input id="reject-btn" type="button" value ="reject"/></div>'
+        . $v["reason"] . "</td><td>"
+        . '<div data-status="'.  $v["status"] . '" data-item-name="' . $v["item_name"] . '" data-username="' .  $v["username"] . '"><input class="approve-btn" type="button" value ="approve")/> <input class="reject-btn" type="button" value ="reject"/></div>'
         . "</td>";
         echo "</tr>";
     }
     echo "</table>";
   }else {
-    $stmt = $conn->prepare("SELECT item_name,username,status FROM requests WHERE username = '$username'");
+    $stmt = $conn->prepare($request_query . " WHERE username = '$username'");
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
-    echo "<table>";
-    echo "<tr>";
-    echo "<th>item_name</th>";
-    echo "<th>username</th>";
-    echo "<th>status</th>";
-    echo "<th>Date Submitted</th>";
-    echo "<th>Date Resolved</th>";
     echo "</tr>";
 	  foreach(new RecursiveArrayIterator($stmt->fetchAll()) as $k=>$v) {
         echo "<tr>";
-        echo "<td>" . $v["item_name"] . "</td><td>" . $v["username"] . "</td><td>" . $v["status"] . "</td><td>" . $v["date_submitted"] . "</td><td>" . $v["date_resolved"] . "</td>";
+        echo "<td>" . $v["item_name"] . "</td><td>" . $v["username"] . "</td><td>" . $v["status"] . "</td><td>" . $v["date_submitted"] . "</td><td>" . $v["date_resolved"] . "</td><td>" . $v["reason"] . "</td>";
         echo "</tr>";
     }
     echo "</table>";

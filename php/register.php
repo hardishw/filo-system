@@ -7,6 +7,19 @@
 </head>
 
 <body>
+<?php
+$error = $_GET["error"];
+switch ($error) {
+  case 'value':
+    # code...
+    break;
+
+  default:
+    # code...
+    break;
+}
+?>
+
   <form action="../php/registerUser.php" method="post">
     <p style="color:red;">* required </p>
     <p>

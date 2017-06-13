@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -11,7 +12,7 @@
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    require 'databaseConnection.php';
+    require 'modules/databaseConnection.php';
     $stmt = $conn->prepare("SELECT firstname,secondname,password FROM users WHERE username = '$username'");
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);

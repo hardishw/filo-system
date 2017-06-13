@@ -4,7 +4,7 @@
   $username = $_POST["username"];
 
 
-  require 'databaseConnection.php';
+  require 'modules/databaseConnection.php';
 
   if($request === "approve"){
     $stmt = "UPDATE requests SET status = 'APPROVED', date_resolved = cast(now() as date) WHERE item_name = '$item_name' AND username = '$username'";
