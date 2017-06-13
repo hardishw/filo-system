@@ -16,8 +16,21 @@
     $date_max = $_POST["date_max"];
     $category = $_POST["category"];
 
+    $query = "SELECT id,item_name,category,place_found,date_found FROM lost_items WHERE item_name LIKE '%$search%'";
+
+    if(!empty($date_min)){
+      $query = $query . " AND date_found >= '$date_min'";
+    }
+    if(!empty($date_max)){
+      $query = $query . " AND date_found <= '$date_max'";
+    }
+    if (!empty($category)) {
+      $query = $query . " AND category = '$category'";
+    }
+
+
     require 'modules/databaseConnection.php';
-    $stmt = $conn->prepare("SELECT id,item_name,category,place_found,date_found FROM lost_items WHERE (date_found BETWEEN '$date_min' AND '$date_max') AND category = '$category' AND item_name LIKE '%$search%'");
+    $stmt = $conn->prepare($query);
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     echo "<br>";

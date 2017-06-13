@@ -24,7 +24,7 @@ function clearCookies() {
 var myCookie = getCookie("username");
 
 if (myCookie == null) {
-    document.getElementById("login").innerHTML = '<a href="php/login-page.php">Login</a>'
+    document.getElementById("login").innerHTML = '<a href="/php/login.php">Login</a>'
 }
 else {
     document.getElementById("login").innerHTML = myCookie + ' <input type="button" value ="logout" onclick= \'clearCookies();\'/>';

@@ -21,7 +21,7 @@ function validateUser()
 }
 
 if(validateUser() == 0){
-  header('Location: ../login-page.php');
+  header('Location: /php/login.php');
 }
 
 ?>

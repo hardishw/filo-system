@@ -11,7 +11,7 @@
       </td>
       <td><a href="php/register.php">Register</a></td>
       <td><a href="php/requests.php">Requests</a></td>
-      <td><a href="php/report-lost.php">Report Lost Item</a></td>
+      <td><a href="php/reportLost.php">Report Lost Item</a></td>
     </tr>
   </table>
   <script type="text/javascript" src="index.js"></script>
@@ -24,13 +24,11 @@
 
 <body>
 
-  <p style="color:red;">* required </p>
-
-  <form action="php/search.php" method="post">
+  <form action="/php/search.php" method="post">
 
     <div>
       <fieldset>
-        <legend>Search :</legend>
+        <legend>Search:</legend>
         <p>
           Search:
           <input type="text" name="search" size="15" maxlength="50">
@@ -39,7 +37,7 @@
     </div>
     <div>
       <fieldset>
-        <legend>Time Frame Lost *:</legend>
+        <legend>Time Frame Lost:</legend>
         <p>
           Date min:
           <input type="date" name="date_min">
@@ -52,7 +50,7 @@
     </div>
     <div>
       <fieldset>
-        <legend>Category *:</legend>
+        <legend>Category:</legend>
         <input type="radio" name="category" value="Pets"> Pets
         <input type="radio" name="category" value="Electronics"> Electronics
         <input type="radio" name="category" value="Jewellery"> Jewellery

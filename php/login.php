@@ -7,29 +7,30 @@
 </head>
 
 <body>
-
-    <?php
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    require 'modules/databaseConnection.php';
-    $stmt = $conn->prepare("SELECT firstname,secondname,password FROM users WHERE username = '$username'");
-    $stmt->execute();
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-	  $result = $stmt->fetchAll();
-
-    if (password_verify($password,$result[0]["password"])){
-      setcookie("password",$result[0]["password"], time() + 3600,"/");
-      setcookie("username",$username, time() + 3600,"/");
-      echo "<p>Successfully Logged In</p>";
-    }else {
-      header('Location: ../php/login-page.php?error=true');
+  <?php
+    $error = $_GET["error"];
+    if($error){
+      echo "<p style'color:red;'>Incorrect Login Details</p>";
     }
+  ?>
+  <form action="/php/validateLogin.php" method="post">
 
-    ?>
+    <p>
+      Username:
+      <input type="text" name="username" size="15" maxlength="20">
+    </p>
+    <p>
+      Password:
+      <input type="password" name="password" size="15" maxlength="20">
+    </p>
+    <p>
+      Not registered? <a href="/php/register.php">Click here</a>
+    </p>
+    <p>
+      <input type="submit" name="submit" value="Submit">
+    </p>
 
-
+  </form>
 
 </body>
 

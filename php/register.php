@@ -10,17 +10,19 @@
 <?php
 $error = $_GET["error"];
 switch ($error) {
-  case 'value':
-    # code...
+  case '1':
+    echo '<p style="color:red;"> password cannot be empty or passwords don\'t match</p>';
     break;
-
-  default:
-    # code...
+  case '2':
+    echo '<p style="color:red;"> email cannot be empty or emails don\'t match</p>';
+    break;
+  case '3':
+    echo '<p style="color:red;"> username cannot be empty</p>';
     break;
 }
 ?>
 
-  <form action="../php/registerUser.php" method="post">
+  <form action="/php/addUser.php" method="post">
     <p style="color:red;">* required </p>
     <p>
       Username:
