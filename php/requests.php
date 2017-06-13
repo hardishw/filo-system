@@ -3,6 +3,7 @@
 
 <head>
   <title>FiLo System - Requests</title>
+  <h2>Requests</h2>
   <a href="../index.html">Home</a>
   <link rel="stylesheet" type="text/css" href="../css/table.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

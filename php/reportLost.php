@@ -3,6 +3,7 @@
 
 <head>
   <title>FiLo System - Report Lost Item</title>
+  <h2>Report Lost Item</h2>
   <a href="../index.html">Home</a>
 </head>
 

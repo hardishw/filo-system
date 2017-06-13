@@ -2,6 +2,7 @@
 
 <head>
   <title>FiLo System - Register</title>
+  <h2>Register</h2>
   <a href="../index.html">Home</a>
 </head>
 

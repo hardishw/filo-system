@@ -3,6 +3,7 @@
 
 <head>
   <title>FiLo System - Login</title>
+  <h2>Login</h2>
   <a href="../index.html">Home</a>
 </head>
 
