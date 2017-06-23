@@ -8,7 +8,28 @@
 </head>
 
 <body>
-  <?php require 'modules/validateUser.php'; ?>
+  <?php
+  require 'modules/validateUser.php';
+
+  $error = $_GET["error"];
+  switch ($error) {
+    case '1':
+      echo '<p style="color:red;">Item Name cannot be empty</p>';
+      break;
+    case '2':
+      echo '<p style="color:red;">Date Found cannot be empty</p>';
+      break;
+    case '3':
+      echo '<p style="color:red;">You must choose a category</p>';
+      break;
+    case '4':
+      echo '<p style="color:red;">Place Found cannot be empty</p>';
+      break;
+    case '5':
+      echo '<p style="color:red;">An image must be uploaded</p>';
+      break;
+  }
+  ?>
   <form action="../php/addLostItem.php" method="post" enctype="multipart/form-data">
     <p style="color:red;">* required </p>
     <p>

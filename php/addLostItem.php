@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>FiLo System - Report Lost Item</title>
+  <h2>Report Lost Item</h2>
+  <a href="../index.html">Home</a>
+</head>
+
 <?php
 //redirects to login page if user is not logged in
 require 'modules/validateUser.php';
@@ -11,6 +20,18 @@ $category = $_POST["category"];
 $place_found = $_POST["place-found"];
 $colour = $_POST["colour"];
 
+if(empty($item_name)){
+  header('Location: /php/reportLost.php?error=1');
+}elseif (empty($date_found)) {
+  header('Location: /php/reportLost.php?error=2');
+}elseif (empty($category)) {
+  header('Location: /php/reportLost.php?error=3');
+}elseif (empty($place_found)) {
+  header('Location: /php/reportLost.php?error=4');
+}elseif (empty($_FILES["fileToUpload"]["name"])) {
+  header('Location: /php/reportLost.php?error=5');
+}
+
 $target_dir = "../images/" . $username . "/";
 if (!file_exists($target_dir)) {
     mkdir($target_dir, 0777, true);
@@ -20,8 +41,8 @@ $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    echo "your file was not uploaded.";
+    echo "<p>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>";
+    echo "<p>your file was not uploaded.</p>";
 // if everything is ok, try to upload file
 
 } else {
@@ -37,3 +58,4 @@ $stmt = "INSERT INTO lost_items(item_name, description, date_found, category, us
 $conn->exec($stmt);
 
 ?>
+</html>
