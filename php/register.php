@@ -4,7 +4,7 @@
 <head>
   <title>FiLo System - Register</title>
   <h2>Register</h2>
-  <a href="../index.html">Home</a>
+  <?php require 'modules/header.php'; ?>
 </head>
 
 <body>
@@ -12,13 +12,10 @@
 $error = $_GET["error"];
 switch ($error) {
   case '1':
-    echo '<p style="color:red;"> password cannot be empty or passwords don\'t match</p>';
+    echo '<p style="color:red;">passwords don\'t match</p>';
     break;
   case '2':
-    echo '<p style="color:red;"> email cannot be empty or emails don\'t match</p>';
-    break;
-  case '3':
-    echo '<p style="color:red;"> username cannot be empty</p>';
+    echo '<p style="color:red;">emails don\'t match</p>';
     break;
 }
 ?>
@@ -27,7 +24,7 @@ switch ($error) {
     <p style="color:red;">* required </p>
     <p>
       Username:
-      <input type="text" name="username" size="15" maxlength="20"> *
+      <input type="text" name="username" size="15" maxlength="20" required> <span style="color:red;">*</span>
     </p>
     <p>
       Firstname:
@@ -39,19 +36,19 @@ switch ($error) {
     </p>
     <p>
       Password:
-      <input type="password" name="password" size="15" maxlength="20"> *
+      <input type="password" name="password" size="15" maxlength="20" required> <span style="color:red;">*</span>
     </p>
     <p>
       Repeat Password:
-      <input type="password" name="repeat-password" size="15" maxlength="20"> *
+      <input type="password" name="repeat-password" size="15" maxlength="20" required> <span style="color:red;">*</span>
     </p>
     <p>
       Email:
-      <input type="text" name="email" size="15" maxlength="50"> *
+      <input type="text" name="email" size="15" maxlength="50" required> <span style="color:red;">*</span>
     </p>
     <p>
       Repeat Email:
-      <input type="text" name="repeat-email" size="15" maxlength="50"> *
+      <input type="text" name="repeat-email" size="15" maxlength="50" required> <span style="color:red;">*</span>
     </p>
     <p>
       <input type="submit" name="submit" value="Submit">

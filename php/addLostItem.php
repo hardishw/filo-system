@@ -4,7 +4,7 @@
 <head>
   <title>FiLo System - Report Lost Item</title>
   <h2>Report Lost Item</h2>
-  <a href="../index.html">Home</a>
+  <?php require 'modules/header.php'; ?>
 </head>
 
 <?php
@@ -19,18 +19,6 @@ $date_found = $_POST["date-found"];
 $category = $_POST["category"];
 $place_found = $_POST["place-found"];
 $colour = $_POST["colour"];
-
-if(empty($item_name)){
-  header('Location: /php/reportLost.php?error=1');
-}elseif (empty($date_found)) {
-  header('Location: /php/reportLost.php?error=2');
-}elseif (empty($category)) {
-  header('Location: /php/reportLost.php?error=3');
-}elseif (empty($place_found)) {
-  header('Location: /php/reportLost.php?error=4');
-}elseif (empty($_FILES["fileToUpload"]["name"])) {
-  header('Location: /php/reportLost.php?error=5');
-}
 
 $target_dir = "../images/" . $username . "/";
 if (!file_exists($target_dir)) {

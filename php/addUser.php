@@ -3,7 +3,7 @@
 <head>
   <title>FiLo System - Register</title>
   <h2>Register</h2>
-  <a href="../index.html">Home</a>
+  <?php require 'php/modules/header.php'; ?>
 </head>
 
 <body>
@@ -17,12 +17,10 @@
     $email = $_POST["email"];
     $repeat_email = $_POST["repeat-email"];
 
-    if((empty($password) or empty($repeat_password)) or (!password_verify($repeat_password,$password))){
+    if(!password_verify($repeat_password,$password)){
       header('Location: /php/register.php?error=1');
-    }elseif ((empty($email) or empty($repeat_email)) or ($email != $repeat_email)) {
+    }elseif ($email != $repeat_email) {
       header('Location: /php/register.php?error=2');
-    }elseif (empty($username)) {
-      header('Location: /php/register.php?error=3');
     }else {
       require 'modules/databaseConnection.php';
       $stmt = "INSERT INTO users (username, firstname, secondname, password, email) VALUES ('$username','$firstname','$secondname','$password','$email')";
