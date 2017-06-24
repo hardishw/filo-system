@@ -12,4 +12,5 @@ echo '
 </table>
 </div>
 <script type="text/javascript" src="/js/header.js"></script>';
+echo '<hr>';
 ?>
