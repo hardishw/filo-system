@@ -16,8 +16,8 @@ function getCookie(name) {
 }
 
 function clearCookies() {
-  document.cookie = "username=; expires=Thu, 01 Jan 2000 00:00:00 GMT";
-  document.cookie = "password=; expires=Thu, 01 Jan 2000 00:00:00 GMT";
+  document.cookie = "username=; expires=Thu, 01 Jan 2000 00:00:00 GMT; path=/";
+  document.cookie = "password=; expires=Thu, 01 Jan 2000 00:00:00 GMT; path=/";
   location.reload(true);
 }
 
