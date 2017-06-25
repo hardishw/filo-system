@@ -21,7 +21,7 @@
     </p>
     <p>
       Date Found <span style="color:red;">*</span>:
-      <input type="date" name="date-found" size="15" maxlength="20" required="">
+      <input type="date" name="date-found" required>
     </p>
     <p>
       Category <span style="color:red;">*</span>:

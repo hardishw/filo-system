@@ -5,6 +5,12 @@
   <title>FiLo System - Register</title>
   <h2>Register</h2>
   <?php require 'modules/header.php'; ?>
+  <style>
+    .error {
+      color:red;
+      font-size: 150%;
+    }
+  </style>
 </head>
 
 <body>
@@ -12,10 +18,13 @@
 $error = $_GET["error"];
 switch ($error) {
   case '1':
-    echo '<p style="color:red;">passwords don\'t match</p>';
+    echo '<p class="error">passwords don\'t match</p>';
     break;
   case '2':
-    echo '<p style="color:red;">emails don\'t match</p>';
+    echo '<p class="error">emails don\'t match</p>';
+    break;
+  case '3':
+    echo '<p class="error">username already exists</p>';
     break;
 }
 ?>

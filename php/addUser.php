@@ -8,6 +8,7 @@
 
 <body>
     <?php
+    require 'modules/databaseConnection.php';
 
     $username = $_POST["username"];
     $firstname = $_POST["firstname"];
@@ -17,12 +18,18 @@
     $email = $_POST["email"];
     $repeat_email = $_POST["repeat-email"];
 
-    if(!password_verify($repeat_password,$password)){
+    $stmt = $conn->prepare("SELECT username FROM users where lower(username) = lower('$username')");
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $user_exists = $stmt->fetchAll()[0]["username"];
+
+    if(!empty($user_exists)){
+      header('Location: /php/register.php?error=3');
+    }elseif(!password_verify($repeat_password,$password)){
       header('Location: /php/register.php?error=1');
     }elseif ($email != $repeat_email) {
       header('Location: /php/register.php?error=2');
     }else {
-      require 'modules/databaseConnection.php';
       $stmt = "INSERT INTO users (username, firstname, secondname, password, email) VALUES ('$username','$firstname','$secondname','$password','$email')";
       $conn->exec($stmt);
 

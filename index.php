@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <h3>Search</h3>
 
   <form action="/php/search.php" method="post">
 
@@ -22,7 +23,7 @@
         <fieldset>
           <legend>Search:</legend>
           <p>
-            Search:
+            Item Name:
             <input type="text" name="search" size="15" maxlength="50">
           </p>
         </fieldset>

@@ -10,6 +10,7 @@
 <?php
 //redirects to login page if user is not logged in
 require 'modules/validateUser.php';
+require 'modules/uploadImage.php';
 
 $username = $_COOKIE["username"];
 
@@ -20,29 +21,10 @@ $category = $_POST["category"];
 $place_found = $_POST["place-found"];
 $colour = $_POST["colour"];
 
-$target_dir = "../images/" . $username . "/";
-if (!file_exists($target_dir)) {
-    mkdir($target_dir, 0777, true);
-}
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "<p>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>";
-    echo "<p>your file was not uploaded.</p>";
-// if everything is ok, try to upload file
-
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-}
+$image_path = uploadImage($username);
 
 require 'modules/databaseConnection.php';
-$stmt = "INSERT INTO lost_items(item_name, description, date_found, category, user, place_found, colour, image_path) VALUES ('$item_name','$description','$date_found','$category','$username','$place_found','$colour','$target_file')";
+$stmt = "INSERT INTO lost_items(item_name, description, date_found, category, user, place_found, colour, image_path) VALUES ('$item_name','$description','$date_found','$category','$username','$place_found','$colour','$image_path')";
 $conn->exec($stmt);
 
 ?>

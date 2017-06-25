@@ -45,11 +45,12 @@
           <th>Image</th>
           <th>Request Reason</th>
           <th>Request</th>
+          <th>Edit Item</th>
           </tr>";
 
     foreach(new RecursiveArrayIterator($stmt->fetchAll()) as $k=>$v) {
         require 'modules/databaseConnection.php';
-        $requested = $conn->prepare("SELECT 1 as requested FROM requests WHERE item_id = $item_id and username = '" . $_COOKIE["username"] . "'");
+        $requested = $conn->prepare("SELECT 1 as requested FROM requests WHERE item_id = $item_id and username = '{$_COOKIE["username"]}'");
         $requested->execute();
         $requested->setFetchMode(PDO::FETCH_ASSOC);
         $result = $requested->fetchAll();
@@ -64,6 +65,12 @@
           }else {
             echo "<td><div data-item-id = '$item_id'><input class='request' type=\"button\" name=\"submit\" value=\"Request\"></div></td>";
           }
+        echo "<td>
+          <form action='editItem.php' method='post'>
+          <input type=\"submit\" name=\"edit\" value=\"Edit Item\">
+          <input type='hidden' name='item-id' value='$item_id'>
+          </form>
+          </td>";
         echo "</tr>";
     }
     echo "</table>";

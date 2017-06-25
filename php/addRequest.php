@@ -9,7 +9,12 @@ $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $result = $stmt->fetchAll()[0]["item_name"];
 
-$stmt = "INSERT INTO requests(item_name, item_id, username, status,date_submitted,reason) VALUES ('$result',$item_id,'$username','PENDING',cast(now() as date),'$reason')";
+$stmt = $conn->prepare("SELECT id FROM users where username = '$username'");
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$user_id = $stmt->fetchAll()[0]["id"];
+
+$stmt = "INSERT INTO requests(item_name, item_id, username, status,date_submitted,reason,user_id) VALUES ('$result',$item_id,'$username','PENDING',cast(now() as date),'$reason',$user_id)";
 $conn->exec($stmt);
 
 ?>
