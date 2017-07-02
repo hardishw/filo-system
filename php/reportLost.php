@@ -4,7 +4,9 @@
 <head>
   <title>FiLo System - Report Lost Item</title>
   <h2>Report Lost Item</h2>
-  <?php require 'modules/header.php'; ?>
+  <?php
+  require 'modules/validateUser.php';
+  require 'modules/header.php'; ?>
 </head>
 
 <body>
